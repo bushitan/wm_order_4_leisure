@@ -27,7 +27,7 @@
 		
 		<view class="cu-card padding-lr margin-top">
 		    <view class=" pg-radius  shadow shadow-warp bg-white">
-				<image  src="/static/images/home/swiper/swiper-1.png" mode="widthFix" class="pg-image-block"></image>
+				<image  src="/static/images/strong/banner.jpg" mode="widthFix" class="pg-image-block"></image>
 		    </view>
 		</view>
 		
@@ -105,7 +105,7 @@
 		</view>
 		
 		<view class=" flex justify-center margin-top">
-		    <button class=" cu-btn round  text-gray text-sm"  type="" open-type="contact">联系Strong客服</button>
+		    <button class=" cu-btn round  text-gray text-sm"  type="" open-type="contact">联系客服</button>
 		</view>
 		
 		<view class=" padding-xs flex align-center margin-top-sm">

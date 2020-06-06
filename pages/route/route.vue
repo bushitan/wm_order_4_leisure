@@ -1,6 +1,6 @@
 <template>
 	<view class="flex align-center  box" :style="'background-color:' + bgColor">
-		<image class="cover" src="../../static/images/strong/loading.jpg" mode="widthFix"></image>
+		<image class="cover" src="../../static/images/strong/loading.jpg" mode="aspectFill"></image>
 		<view class="flex justify-center " style="position: fixed; bottom: 20px;left: 0;right: 0;" >
 			<button class="cu-btn line-gray round" @click="clickTo">
 				点击进入
@@ -14,7 +14,8 @@
 		export default{
 			data(){
 				return{
-					bgColor:"#fef4ea",
+					// bgColor:"#fef4ea",
+					bgColor:"#000000",
 					ShopId:"",
 					ShopTakeType:"",
 				}
@@ -48,12 +49,14 @@
 				// uni.setStorageSync(this.db.KEY_SHOP_ID ,ShopId )
 				// uni.setStorageSync(this.db.KEY_SHOP_TAKE_TYPE ,ShopTakeType )
 								
-				this.onInit()
+				// this.onInit()
 			},
 			methods:{
 				clickTo(){
-					uni.redirectTo({
-						url: '/pages/index/index'
+					uni.switchTab({
+						url: '/pages/index/index_lei',
+						success(res){console.log(res)},
+						fail(res){console.log(res)}
 					});
 				},
 				async onInit(){
@@ -122,7 +125,8 @@
 		/* background-color: #fef4ea; */
 	}
 	.cover{
-		width: 100%;
+		width: 100vw;
+		height: 100vh;
 		display: block;
 		
 	}

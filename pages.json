@@ -2,13 +2,13 @@
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		
 		{
-			"path": "pages/index/index_leisure",
+			"path": "pages/route/route",
 			"style": {
 				"navigationStyle": "custom"
 			}
 		},
 		{
-			"path": "pages/route/route",
+			"path": "pages/index/index_lei",
 			"style": {
 				"navigationStyle": "custom"
 			}
@@ -81,15 +81,22 @@
 	],
 	"tabBar": {
 		"color": "#bfbfbf",
-		"selectedColor": "#efaf30",
+		"selectedColor": "#000000",
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
 		"list": [{
-				"pagePath": "pages/index/index_leisure",
+				"pagePath": "pages/index/index_lei",
 				"iconPath": "static/images/icon/menu_un.png",
 				"selectedIconPath": "static/images/icon/menu.png",
-				"text": "点单"
-			},{
+				"text": "首页"
+			},
+			// {
+			// 	"pagePath": "pages/menu/menu",
+			// 	"iconPath": "static/images/icon/menu_un.png",
+			// 	"selectedIconPath": "static/images/icon/menu.png",
+			// 	"text": "点单"
+			// },
+			{
 				"pagePath": "pages/order/current",
 				"iconPath": "static/images/icon/order_un.png",
 				"selectedIconPath": "static/images/icon/order.png",
