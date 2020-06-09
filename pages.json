@@ -13,6 +13,14 @@
 				"navigationStyle": "custom"
 			}
 		},
+		
+		{
+			"path": "pages/good/good",
+			"style": {				
+				"borderStyle": "white",
+				"backgroundColor": "#efaf30"
+			}
+		},
 		{
 			"path": "pages/menu/menu",
 			"style": {
@@ -90,12 +98,12 @@
 				"selectedIconPath": "static/images/icon/menu.png",
 				"text": "首页"
 			},
-			// {
-			// 	"pagePath": "pages/menu/menu",
-			// 	"iconPath": "static/images/icon/menu_un.png",
-			// 	"selectedIconPath": "static/images/icon/menu.png",
-			// 	"text": "点单"
-			// },
+			{
+				"pagePath": "pages/menu/menu",
+				"iconPath": "static/images/icon/menu_un.png",
+				"selectedIconPath": "static/images/icon/menu.png",
+				"text": "点单"
+			},
 			{
 				"pagePath": "pages/order/current",
 				"iconPath": "static/images/icon/order_un.png",

@@ -40,7 +40,7 @@
 				  </view> -->
 			</view>
 			
-			<view class="cu-card case no-card">
+			<view class="cu-card case no-card" v-for="(item,key) in goodList" @click="toGoodDetal">
 				<view class="cu-item ">
 					<view class="image shadow shadow-warp">
 						  <image src="../../static/images/strong/good_1.jpg" mode="aspectFill" style="height: 150px;"></image>
@@ -60,33 +60,11 @@
 						  </view>
 					</view> -->
 				</view>			
-			</view>
+			</view>		
 			
 			
-			<view class="cu-card case no-card">
-				<view class="cu-item ">
-					<view class="image shadow shadow-warp">
-						  <image src="../../static/images/strong/good_2.jpg" mode="aspectFill" style="height: 150px;"></image>
-						  <view class="cu-tag bg-red">分销10元奖励</view>
-						  <view class="cu-bar bg-shadeBottom">
-							<text class="text-cut">招牌冰滴</text>
-						  </view>
-					</view>
-					<!-- <view class="cu-list menu-avatar padding-lr">
-						  <view class="cu-item">
-							<view class=" flex-sub">
-							  <view class="text-black ">桂花冰酿</view>
-							  <view class="text-gray  text-sm flex justify-between">
-								每天限量
-							  </view>
-							</view>
-						  </view>
-					</view> -->
-				</view>			
-			</view>
-			
-			<view class="text-center text-gray text-xs margin-top-xl">
-				这是底部
+			<view class="text-center text-gray margin-top">
+				已经到底部
 			</view>
 			<view class="pg-space-xl">
 				
@@ -134,6 +112,7 @@
 							}
 					]},
 				
+				goodList:[1,2,3],
 			}
 		},
 		onLoad() {
@@ -175,6 +154,12 @@
 					url:"/pages/order/current"
 				})
 				
+			},
+			
+			toGoodDetal(){
+				uni.navigateTo({
+					url:"/pages/good/good?itemId=102"
+				})
 			},
 			
 			swiperChange(){
