@@ -11,6 +11,7 @@
 </template>
 
 <script>
+		var app = getApp()
 		export default{
 			data(){
 				return{
@@ -18,40 +19,67 @@
 					bgColor:"#000000",
 					ShopId:"",
 					ShopTakeType:"",
+					
+					// isShare:false,
+					// shareGoodID:"",
+					// shareUserSN:"",
 				}
 			},
 			onLoad(options){
 				console.log(options)
-				
-				// var storeId = options.store_id || ""
+				var ShopId = 
 				this.setData({
-					ShopId : options.store_id || ""
-				})
-				// var customerTakeType = options.type || ""
-				// this.customerTakeType = options.type || 2
-				uni.setStorageSync(this.db.KEY_SHOP_TAKE_TYPE ,options.type || "")
+					ShopId :  options.store_id || 29
+				})				
+				uni.setStorageSync(this.db.KEY_SHOP_TAKE_TYPE ,options.type || "")				
+				uni.setStorageSync(this.db.KEY_SHOP_ID , this.$data.ShopId )
 				
-				// setTimeout(function(){					
-				// 	uni.redirectTo({
-				// 		url: '/pages/index/index'
-				// 	});				
-				// },1500)
-				
-				
-				// console.log(options)
-				// var ShopId = options.ShopId || ""
-				// var ShopTakeType = options.ShopTakeType || ""
-				// this.setData({
-				// 	ShopId: ShopId,
-				// 	ShopTakeType:ShopTakeType,
-				// })
-				
-				// uni.setStorageSync(this.db.KEY_SHOP_ID ,ShopId )
-				// uni.setStorageSync(this.db.KEY_SHOP_TAKE_TYPE ,ShopTakeType )
+				// 获取分销信息
+				const scene = decodeURIComponent(options.scene || "") 
+				console.log(scene)
+				this.checkShareUser(scene)
 								
-				// this.onInit()
+				this.onInit()
+				
+				// this.testAdd()
 			},
 			methods:{
+				
+				// 分销者
+				checkShareUser(scene){
+					// debugger
+					
+					app.globalData.isShare = false
+					if (scene.length > 1){ //  判断是否为空
+					
+						var list = scene.split("_")
+						app.globalData.isShare = true
+						app.globalData.shareGoodID = list[0]
+						app.globalData.shareUserSN = list[1]
+							
+						// this.setData({
+						// 	isShare:true,
+						// 	shareGoodID:list[0],
+						// 	shareUserSN:list[1],
+						// })
+					}
+						
+					
+				},
+				
+				
+				// async testAdd(){
+				// 	var res = await this.db.customerGetPoint()
+				// 	console.log(res)
+				// 	var res = await this.db.wxOpenGetQRUnlimit({
+				// 		path:"pages/route/route",
+				// 		query:"shopid=1&shareopenid=1",
+				// 		isForce:1,
+				// 	})
+				// 	console.log(res)
+					
+				// },
+				
 				clickTo(){
 					uni.switchTab({
 						url: '/pages/index/index_lei',
@@ -59,59 +87,21 @@
 						fail(res){console.log(res)}
 					});
 				},
+				
+				toGood(){
+					uni.redirectTo({			
+						url:"/pages/good/good?itemId=" + app.globalData.shareGoodID 
+					})
+				},
 				async onInit(){
 					// return
 					var res = await this.db.customerGetToken()
 					console.log('get token',res)
-					
-					var that = this
-					if(that.$data.ShopId == ""){
-						console.log('ShopId is null')
-						uni.redirectTo({
-							url: '/pages/index/index'
-						});
-						
-					}
-					
-					else {
-						that.db.storeCurrent({
-							shopId:that.$data.ShopId
-						}).then(res=>{
-							console.log('storeCurrent' , res)
-							uni.setStorageSync(that.db.KEY_SHOP_NAME , res.data.Hosts)
-							uni.switchTab({
-								url:"/pages/menu/menu?ShopId=" + that.$data.ShopId
-							})
-						}).catch(res =>{
-							console.log('catch' , res)
-							uni.redirectTo({
-								url: '/pages/index/index'
-							});
-						})					
-					}		
-					
-					
-					// var that = this
-					// setTimeout(function(){
-					// 	// debugger
-					// 	if(that.$data.ShopId == "")
-					// 		uni.redirectTo({
-					// 			url: '/pages/index/index'
-					// 		});
-					// 	else {
-					// 		that.db.storeCurrent({
-					// 			shopId:that.$data.ShopId
-					// 		}).then(res=>{
-					// 			uni.setStorageSync(that.db.KEY_SHOP_NAME , res.data.Hosts)
-					// 			uni.switchTab({
-					// 				url:"/pages/menu/menu?ShopId=" + that.$data.ShopId
-					// 			})
-					// 		})							
-					// 	}							
-					// },1000)
-					
-					
-					
+					if(app.globalData.isShare == true)
+						this.toGood()
+					else
+						this.clickTo()
+										
 				}
 			}
 		}

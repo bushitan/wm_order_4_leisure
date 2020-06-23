@@ -226,6 +226,7 @@
 </template>
 
 <script>	
+	var app = getApp()
 	export default {
 		data(){
 			
@@ -286,6 +287,12 @@
 		},
 		onLoad(options){
 			this.onInit()
+			
+			console.log(
+			app.globalData.isShare,
+			app.globalData.shareGoodID,
+			app.globalData.shareUserSN,
+			)
 		},
 		
 		methods:{
@@ -447,6 +454,7 @@
 			},			
 			// 选择点单方式
 			selectShopTake(){
+				// debugger
 				var ShopTakeList = this.$data.ShopTakeList
 				var itemList = []
 				
@@ -535,10 +543,9 @@
 					"ShopId":this.$data.StoreId,
 					"CustomerTakeType":this.$data.ShopTakeValue,
 					"WishDateTime": this.$data.PickTime,
-					"formId":formId
+					"formId":formId,
 					// "AppId":"5099f520489646d28ce9df352237c059" ,// 门店点Appid，不是小程序ID
 				}
-				
 				// 取单联系方式判断
 				if(this.$data.ShopTakeValue == this.db.SHOP_TAKE_WM){ //外卖
 					if(this.$data.currentAddress.id)
@@ -565,7 +572,8 @@
 				var jsondata = JSON.stringify(data)				
 				console.log(data)
 				var res = await this.db.orderGen({
-					jsondata:jsondata
+					jsondata:jsondata,					
+					sharewxopenid:app.globalData.shareUserSN || "", // 分享者id
 				})
 				if(res.code == 0){
 					var data = res.data

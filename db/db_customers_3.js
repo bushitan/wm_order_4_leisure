@@ -27,7 +27,9 @@ class son extends fahter{
                         method: "POST",
                     }).then(res => {
                         uni.setStorageSync(that.KEY_SESSION, res.data.data.session) //session
-                        uni.setStorageSync(that.KEY_SN, "10" + res.data.data.sn)  //序列号
+                        uni.setStorageSync(that.KEY_SN, res.data.data.sn)  //序列号			
+                        uni.setStorageSync(that.KEY_UNION_KEY, res.data.data.unionKey)  //唯一值				
+						
 						console.log("get customerGetToken success")
                         resolve(true)
                     })
@@ -139,6 +141,16 @@ class son extends fahter{
 	}
 	
 
+	/**
+	 * @method 8 获取积分
+	 * @param 
+	 */
+	customerGetPoint(data) {
+		return new Promise((resolve, reject) => {
+			this.base({url: this.HOST_URL +  "api/customer/point/",data: data,}).then(res => {resolve(res.data)}).catch(res => reject(res))
+		})
+	}
+	
 
 }
 module.exports = son

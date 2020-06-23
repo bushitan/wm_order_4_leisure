@@ -1,6 +1,12 @@
 <script>
 	import Vue from 'vue'
 	export default {
+		globalData: {  
+			isShare: false,
+			shareGoodID:"",
+			shareUserSN:"",
+		}, 
+				
 		onLaunch: function() {
 			uni.getSystemInfo({
 				success: function(e) {

@@ -1,5 +1,15 @@
 <template>
 		<view class="bg-white">
+			
+			<!-- <tabbar></tabbar> -->
+			
+			<view class="bg-white my_score flex align-center padding text-sm" style="height:80px;">
+				<image src='/static/images/strong/logo.jpg'				
+					class="cu-avatar round  bg-gray margin-right-xs"  
+					style="width:23px;height: 23px;"></image>
+				分享积分:{{totalFee}}
+				 <!-- [查看说明] -->
+			</view>
 			<view class="flex justify-center">
 				<image src="../../static/images/strong/1.png" mode="widthFix" style="width: 60vw;"></image>
 			</view>
@@ -23,8 +33,10 @@
 			</view> -->
 			
 			
-			<swiper class="card-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#000000">
-			  <swiper-item v-for="(item,index) in swiperInfo.list" :key="index" :class="cardCur==index?'cur':''">
+			<swiper class="card-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500"  indicator-color="#8799a3" indicator-active-color="#000000">
+			  <swiper-item v-for="(item,index) in swiperInfo.list" :key="index" 
+				:class="cardCur==index?'cur':''" 
+				@click="toGoodDetal(item.url)">
 			    <view class="swiper-item">
 			      <image :src="item.swiper" mode="aspectFill"  ></image>
 			    </view>
@@ -40,13 +52,13 @@
 				  </view> -->
 			</view>
 			
-			<view class="cu-card case no-card" v-for="(item,key) in goodList" @click="toGoodDetal">
+			<view class="cu-card case no-card" v-for="(item,index) in goodList" @click="toGoodDetal(item.url)">
 				<view class="cu-item ">
 					<view class="image shadow shadow-warp">
-						  <image src="../../static/images/strong/good_1.jpg" mode="aspectFill" style="height: 150px;"></image>
-						  <view class="cu-tag bg-red">分销10元奖励</view>
+						  <image :src="item.cover" mode="aspectFill" style="height: 150px;"></image>
+						  <view class="cu-tag bg-red" @click.stop="getShareQR(index)">{{item.des}}</view>
 						  <view class="cu-bar bg-shadeBottom">
-							<text class="text-cut">桂花冰酿</text>
+							<text class="text-cut">{{item.name}}</text>
 						  </view>
 					</view>
 					<!-- <view class="cu-list menu-avatar padding-lr">
@@ -77,6 +89,8 @@
 	export default {
 		data() {
 			return {
+				totalFee:"", // 总积分
+				
 				title: 'Hello',
 				isHost: true,
 				isSeller: true,
@@ -96,23 +110,33 @@
 				
 				
 				swiperInfo: {index: 0, show: true, welcome: true, 
-					list: [
-						
-							{
-								swiper: '../../static/images/strong/banner.jpg',
-								background: '/static/images/home/swiper/swiper-background-1.png',
-							},
-							{
-								swiper: '../../static/images/strong/banner.jpg',
-								background: '/static/images/home/swiper/swiper-background-2.png',
-							},
-							{
-								swiper: '../../static/images/strong/banner.jpg',
-								background: '/static/images/home/swiper/swiper-background-3.png',
-							}
+					list: [						
+						{
+							swiper: '../../static/images/strong/banner.jpg',
+							background: '/static/images/home/swiper/swiper-background-1.png',
+							url:"/pages/good/good?itemId=1230",
+						},
+						{
+							swiper: '../../static/images/strong/banner.jpg',
+							background: '/static/images/home/swiper/swiper-background-2.png',
+							url:"/pages/good/good?itemId=1230",
+						},
+						{
+							swiper: '../../static/images/strong/banner.jpg',
+							background: '/static/images/home/swiper/swiper-background-3.png',
+							url:"/pages/good/good?itemId=1230",
+						}
 					]},
 				
-				goodList:[1,2,3],
+				goodList:[
+					{
+						goodID : 1230,
+						cover: '../../static/images/strong/good_1.jpg',
+						name:"桂花冰酿",
+						des: '点击分享、获得10元积分',
+						url:"/pages/good/good?itemId=1230",
+					},
+				],
 			}
 		},
 		onLoad() {
@@ -124,15 +148,22 @@
 		methods: {
 			
 			async onInit(){		
-				var res = await this.db.orderGetList({
-					Page:1,
-					Limit:15,				
-					CreatedAtMin: this.today,
+				// var res = await this.db.orderGetList({
+				// 	Page:1,
+				// 	Limit:15,				
+				// 	CreatedAtMin: this.today,
 					
-				})	
+				// })	
+				// this.setData({
+				// 	orderList:res.data
+				// })
+				
+				var res = await this.db.customerGetPoint()
+				console.log(res)
 				this.setData({
-					orderList:res.data
+					totalFee:res.data.wallet.totalFee || '0',
 				})
+				
 			},
 			toMenu(id,name){
 				uni.setStorageSync(this.db.KEY_SHOP_ID,id)
@@ -156,15 +187,25 @@
 				
 			},
 			
-			toGoodDetal(){
+			toGoodDetal(url){
 				uni.navigateTo({
-					url:"/pages/good/good?itemId=102"
+					url:url
 				})
 			},
 			
 			swiperChange(){
 				
 			},
+			
+			getShareQR(index){
+				uni.navigateTo({
+					url:"/pages/good/share?good_index=" + index,
+					fail(res){
+						console.log(res)
+					}
+				})
+			},
+			
 		}
 	}
 </script>
@@ -203,4 +244,12 @@
 	.zaiui-view-content.show {
 		display: block;
 	}
+	
+	.my_score{
+		// position: fixed;
+		// top:0;
+		// right:0;
+		// left: 0;
+	}
+	
 </style>

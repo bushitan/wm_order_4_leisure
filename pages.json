@@ -8,12 +8,19 @@
 			}
 		},
 		{
-			"path": "pages/index/index_lei",
+			"path": "pages/good/share",
 			"style": {
-				"navigationStyle": "custom"
+				"navigationBarTitleText": "分享二维码"
 			}
 		},
 		
+		{
+			"path": "pages/index/index_lei",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "white"
+			}
+		},
 		{
 			"path": "pages/good/good",
 			"style": {				
@@ -94,9 +101,9 @@
 		"backgroundColor": "#ffffff",
 		"list": [{
 				"pagePath": "pages/index/index_lei",
-				"iconPath": "static/images/icon/menu_un.png",
-				"selectedIconPath": "static/images/icon/menu.png",
-				"text": "首页"
+				"iconPath": "static/images/icon/logo_un.png",
+				"selectedIconPath": "static/images/icon/logo.png",
+				"text": "热销"
 			},
 			{
 				"pagePath": "pages/menu/menu",
@@ -119,7 +126,7 @@
 	},
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "丰丰点单商城",
+		"navigationBarTitleText": "LEISURE CAFE 商城",
 		"navigationBarBackgroundColor": "#ffffff",
 		"backgroundColor": "#F8F8F8"  //,"navigationStyle": "custom"
 	}

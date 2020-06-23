@@ -136,12 +136,9 @@
 					<!-- <view class="line-red text-sm " v-for="(item,key) in shopDiscount" v-bind:key="key">{{item.name}}</view> -->
 								
 				</view>
-				<view class="action  text-sm basis-df text-right" @click="selectShop">
-					<!-- <text class="line-black ">{{shopName}}</text>
-					<text class="line-gray" >(选择门店)</text> -->
+				<!-- <view class="action  text-sm basis-df text-right" @click="selectShop">
 					<button class="cu-btn sm line-yellow">{{shopName}}(切换门店)</button>
-					<!-- <view class="pg-arrow"></view> -->
-				</view>
+				</view> -->
 			</view>
 		</view>
 			
@@ -299,8 +296,8 @@
 				
 				cardCur: 0,
 				swiperList:[
-					"/static/images/strong/swiper1_lg.jpg",
-					"/static/images/strong/swiper2_lg.jpg",
+					"/static/images/strong/good_1.jpg",
+					"/static/images/strong/banner.jpg",
 				],
 				
 				
@@ -342,7 +339,7 @@
 				
 				shopId:"",
 				shopName:"南湖店",
-				shopDiscount:"消费满40元减免顺丰配送费",
+				shopDiscount:"消费满45元减免顺丰配送费",
 			};
 		},
 		async onLoad(options) {

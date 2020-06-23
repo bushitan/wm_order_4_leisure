@@ -37,7 +37,10 @@ Vue.component('goods-list', gridSortList)
 import _home_data from '@/static/zaiui/data/home.js';
 Vue.prototype.home_data = _home_data
 
-
+//分销字段
+Vue.prototype.isShare = false
+Vue.prototype.shareGoodID = ""
+Vue.prototype.shareUserSN = ""
 
 
 Vue.prototype.Shop = {

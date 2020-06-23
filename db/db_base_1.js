@@ -8,6 +8,8 @@ class dbBase{
 	KEY_UUID = "uuid"
 	KEY_TOKEN = "token"
 	KEY_SESSION = "Session"
+	KEY_SN = "sn"
+	KEY_UNION_KEY = "union_key"
 	KEY_SHOP_ID = "shop_id"
 	KEY_SHOP_NAME = "shop_name"
 	KEY_SHOP_TAKE_TYPE= "shop_take_type"
@@ -41,11 +43,11 @@ class dbBase{
 	SHIP_STATUS_CANCEL = 50 //已取消
 	
 	
-	APP_ID = "5099f520489646d28ce9df352237c059"  // Strong
+	APP_ID = "cd8ef711513b41ad8d2f6aea94349e2d"  // leisure
 	// APP_ID = "aaa418db45c94cf7863a30b3f97c7e30" // 门店安心卡 
 	
-	// URL = "http://221.7.253.6:9019/Api/Task/TaskHandler.ashx?"
 	HOST_URL = "https://wm.51zfgx.com/"
+	// HOST_URL = "http://139.159.241.56/"
 	
 	// URL_WORK = "http://221.7.253.6:9019/Api/Task/WorkHandler.ashx?action="
 	
