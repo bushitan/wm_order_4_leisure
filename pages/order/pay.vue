@@ -2,7 +2,7 @@
 	<view class="">
 		<!--状态栏区域-->
 		<view class="text-gray text-sm flex justify-center align-center bg-white" >
-			外卖下单可享受
+			优选外卖
 			<image src='/static/images/icon/sf_logo.png'
 				class="cu-avatar radius lg  bg-white margin-right-sm" 
 				style="width: 100px;" 
@@ -384,7 +384,7 @@
 					case 1 : ShopTakeList = [{"name":"外卖",value:1}] ;break;
 					case 2 : ShopTakeList = [{"name":"到店自取",value:2}] ;break;
 					case 4 : ShopTakeList = [{"name":"堂食",value:4}] ;break;
-					case 3 : ShopTakeList = [{"name":"到店自取",value:2},{"name":"外卖",value:1}] ;break;
+					case 3 : ShopTakeList = [{"name":"外卖",value:1},{"name":"到店自取",value:2}] ;break;
 					case 5 : ShopTakeList = [{"name":"堂食",value:4},{"name":"外卖",value:1}] ;break;
 					case 6 : ShopTakeList = [{"name":"堂食",value:4},{"name":"到店自取",value:2}] ;break;
 					case 7 : ShopTakeList = [{"name":"堂食",value:4},{"name":"到店自取",value:2},{"name":"外卖",value:1}] ;break;

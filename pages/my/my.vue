@@ -27,7 +27,7 @@
 		
 		<view class="cu-card padding-lr margin-top">
 		    <view class=" pg-radius  shadow shadow-warp bg-white">
-				<image  src="/static/images/strong/banner.jpg" mode="widthFix" class="pg-image-block"></image>
+				<image  src="https://wm.51zfgx.com/images/thumbs/0002376.jpeg" mode="widthFix" class="pg-image-block"></image>
 		    </view>
 		</view>
 		
@@ -208,7 +208,7 @@
 				console.log("openMini")
 				uni.navigateToMiniProgram({
 				  appId: 'wxd19bbe9cb3b293b6',
-				  path: 'pages/route/route?mode=store&store_uuid=68e54718-7156-11e9-b456-e95aa2c51b5d',
+				  path: 'pages/route/route?mode=store&store_uuid=5340c542-074f-11ea-94f7-e95aa2c51b5d',
 				  // extraData: {
 				  //   'data1': 'test'
 				  // },

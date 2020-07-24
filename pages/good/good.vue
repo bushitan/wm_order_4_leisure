@@ -23,20 +23,33 @@
 					<text class="text-price text-xl text-red text-bold"></text>
 					<text class="text-xxl text-red text-bold margin-right">{{currentItem.price}}</text>
 						
-					<view class="text-gray "  style="display: inline-block ;text-decoration:line-through">
+					<!-- <view class="text-gray "  style="display: inline-block ;text-decoration:line-through">
 						<text class="   text-bold">原价：</text>
 						<text class="text-price   text-bold"></text>
 						<text class="  text-bold" >{{currentItem.oldprice}}</text>	
-					</view>
+					</view> -->
 				</view>
 				<view class="action text-gray">
 					仅剩<text class="text-red text-xxl text-bold">{{currentItem.stock}}</text>	件				
 				</view>
-				
-				
-				
 			</view>
-			<view class="padding-lr ">
+			
+			<view class="padding-lr  " v-for="(att , attIndex) in currentItem.attributes" v-bind:key="attIndex">
+				<view class="flex flex-start margin-top-sm">
+					<text class="text-gray radius  text-sm  text-left" >{{att.productAttributeName}} </text>					
+				</view>
+				<view class="flex flex-start  flex-wrap margin-top-sm">	
+										<!-- {{att.attributeValues[0]}}
+										
+										{{currentItem}} -->
+					  <!-- class="cu-btn radius text-sm text-center margin-right-sm margin-bottom-sm"  -->
+					<button :class="['cu-btn radius text-sm text-center margin-right-sm margin-bottom-sm' , value.isSelect?'bg-yellow text-white' :'line-gray']" 
+					v-for="(value,valueIndex) in att.attributeValues" v-bind:key="valueIndex"
+					@click="clickAtt(attIndex,valueIndex)">{{value.name}}</button>						
+				</view>
+			</view>
+			
+			<view class="padding-lr margin-top">
 				<view class="flex flex-start">
 					<text class="bg-gray radius  text-xs margin-right-sm padding-xs"
 						v-for="(tag , tagIndex ) in currentItem.tags" v-bind:key="tagIndex">{{tag}}</text>						
@@ -50,20 +63,6 @@
 				<!-- <view class="flex flex-start margin-top-sm">
 					<text class="text-gray radius  text-sm  text-left" >{{currentItem.fullDescription || ""}}</text>					
 				</view> -->
-			</view>
-			<view class="padding-lr margin-top " v-for="(att , attIndex) in currentItem.attributes" v-bind:key="attIndex">
-				<view class="flex flex-start margin-top-sm">
-					<text class="text-gray radius  text-sm  text-left" >{{att.productAttributeName}} </text>					
-				</view>
-				<view class="flex flex-start  flex-wrap margin-top-sm">	
-										<!-- {{att.attributeValues[0]}}
-										
-										{{currentItem}} -->
-					  <!-- class="cu-btn radius text-sm text-center margin-right-sm margin-bottom-sm"  -->
-					<button :class="['cu-btn radius text-sm text-center margin-right-sm margin-bottom-sm' , value.isSelect?'bg-yellow text-white' :'line-gray']" 
-					v-for="(value,valueIndex) in att.attributeValues" v-bind:key="valueIndex"
-					@click="clickAtt(attIndex,valueIndex)">{{value.name}}</button>						
-				</view>
 			</view>
 			<view class="pg-space-xxl"></view>
 		</scroll-view>
@@ -102,14 +101,7 @@
 		<view class="" style="position: fixed ;bottom: 0; left: 0;right: 0; " v-if="showMiniBtn == false">			
 			<view class="padding " style="background-color: rgba(255,255,255,0.8);">			
 				<view class="flex justify-between align-center text-xxl margin-top-sm">	
-					<view class="flex ">
-						<button class="cu-btn block round bg-red text-white lg margin-right"
-							:disabled="totalQuantity>0?false :true "	@click="confirmDetail()">支付抢购</button>
-						<button class="cu-btn block round bg-yellow lg " @click="openBill()">
-							<view class="cuIcon-cart text-white lg"></view>
-							<view class="cu-tag badge lg" style="z-index: 999;">{{totalPrice}}</view>
-						</button>						
-					</view>
+					
 					<view class="flex justify-between align-center"  v-show="isLoading==false">		
 									
 						<image src="/static/images/icon/cut.png"  class="pg-icon" @click="cutItem()" 	v-if="order[key]?true : false"></image>	
@@ -117,6 +109,15 @@
 						<text class="padding-lr-sm">{{order[key]? order[key].Quantity : 0 }}</text>			
 						<image src="/static/images/icon/add.png"  class="pg-icon" @click="addItem()"   v-if="isMore"  ></image>
 						<image src="/static/images/icon/add_un.png"  class="pg-icon"  @click="addItemUn()"  v-else></image>
+					</view>
+					<view class="flex ">
+						<button class="cu-btn block round bg-yellow lg margin-right" @click="openBill()">
+							<view class="cuIcon-cart text-white lg"></view>
+							<view class="cu-tag badge lg" style="z-index: 999;">{{totalPrice}}</view>
+						</button>
+						<button class="cu-btn block round bg-red text-white lg "
+							:disabled="totalQuantity>0?false :true "	@click="confirmDetail()">支付抢购</button>
+											
 					</view>	
 				</view>
 			</view>
@@ -249,6 +250,8 @@
 				})
 			},
 			chechMini(){
+				if (!this.$data.currentItem.shortDescription)
+					return
 				var miniConfig = this.$data.currentItem.shortDescription.split("-")
 				if(miniConfig.length == 3){
 					this.setData({
@@ -284,6 +287,8 @@
 				this.initSelect()// 初始化选择框
 				
 				this.chechMini()
+				
+				this.addItem()
 			},
 			
 			// 判断是否还有库存

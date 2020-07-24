@@ -9,7 +9,7 @@
 		<swiper class="screen-swiper square-dot  bg-white" :indicator-dots="true" :circular="false" :autoplay="true" interval="5000"
 		 duration="500">
 			<swiper-item class="swiper-height" v-for="(item,index) in swiperList" :key="index">
-				<image :src="item" mode="aspectFill"></image>
+				<image :src="item" mode="aspectFill" ></image>
 			</swiper-item>
 		</swiper>
 	<!-- 	<swiper class="screen-swiper card-swiper round-dot}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
@@ -296,8 +296,8 @@
 				
 				cardCur: 0,
 				swiperList:[
-					"/static/images/strong/good_1.jpg",
-					"/static/images/strong/banner.jpg",
+					"https://wm.51zfgx.com/images/thumbs/0002376.jpeg",
+					"https://wm.51zfgx.com/images/thumbs/0002363.jpeg",
 				],
 				
 				
@@ -749,6 +749,15 @@
 	}
 	
 	.cu-item:after{border: none !important;}
+	
+	.swiper_image{
+		position: relative;
+	}
+	.swiper_mask{
+		position: absolute;
+		bottom:0;
+	}
+	
 </style>
 
 <!-- 

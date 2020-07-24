@@ -47,7 +47,7 @@ class dbBase{
 	// APP_ID = "aaa418db45c94cf7863a30b3f97c7e30" // 门店安心卡 
 	
 	HOST_URL = "https://wm.51zfgx.com/"
-	// HOST_URL = "http://139.159.241.56/"
+	 // HOST_URL = "http://139.159.241.56/"
 	
 	// URL_WORK = "http://221.7.253.6:9019/Api/Task/WorkHandler.ashx?action="
 	
@@ -227,8 +227,11 @@ class dbBase{
 	getLocation() {
 		return new Promise((resolve,reject) => {
 			var that = this
+			// console.log("wgs84")
 			uni.getLocation({
+			    // type: 'wgs84'
 				type: 'gcj02',
+				// type:"wgs84",
 				success(res) {
 					var obj = {}
 					obj.latitude = res.latitude
